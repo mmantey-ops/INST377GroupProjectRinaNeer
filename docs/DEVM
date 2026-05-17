@@ -7,11 +7,41 @@ the current development team. The audience is expected to have general knowledge
 terminology, but no prior understanding of the system architecture or implementation details. The purpose of this document is to provide 
 clear guidance on the application structure and local environment setup.
 Your Developer Manual covers:
-How to install your application and all dependencies
-How to run your application on a server
-How to run any tests you have written for your software
-The API for your server application - all GET, POST, PATCH, etc endpoints, and what they each do
-A clear set of expectations around known bugs and a road-map for future development.
-Documentation needs to be written in Markdown (MD) files, nicely formatted
-Documentation should be included in each team’s final code submission.
-Documentation should be saved in your main project directory under "docs"
+# To install
+
+#1 ) make sure you have Node.js and npm installed on your computer. You will also need a Supabase account because the app uses Supabase to store the saved fruit data.
+
+First, clone the repository:
+ using git clone https://github.com/mmantey/INST377GroupProjectRinaNeer.git
+
+then, install the required dependencies using npm install.
+
+Now you are goig to create a .env file in the main project folder and add the Supabase credentials after youve made an account:
+- your_supabaseurl
+- your_supabasekey
+
+#2 ) To start the server you have to run:
+npm start
+and the server should run on:
+http://localhost:3000
+
+#3) With that link open it in a browser and you can test the applications functionality by using the fruit search page and checking to make sure all buttons work.
+Developers should also test invalid fruit searches to make sure the error messages pops up correctly.
+
+The Server API Endpoints are 
+GET /api/fruit/:name
+This endpoint gets nutrition data for a fruit from the Fruityvice API.
+So GET /api/fruit/apple
+returns the information in regards to the fruit name, family, genus, calories, sugar, carbohydrates, fat, and protein.
+GET /api/saved-fruits
+This endpoint gets all saved fruits from the Supabase database. The frontend uses this endpoint to show saved fruits in the table.
+POST /api/saved-fruits
+This endpoint saves a fruit and its nutrition information to the Supabase database.
+
+#4)
+Known Bugs
+As of right now there arent any know bugs. However when trying to save fruits to the app table at the bottom some issues arrised due to permission errors and enabling RLS.
+Future Development Roadmap
+Future developers could improve this project by adding better css design or even adding some animations elements. Another improvement could be adding a comparison chart with all fruits that you have saved.
+Tech Stack
+For this project we used HTML, CSS, JavaScript, Node.js, Express.js, Supabase, the Fruityvice API, Chart.js, and SweetAlert2.
