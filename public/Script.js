@@ -115,9 +115,8 @@ async function loadSavedFruits() {
     tableBody.innerHTML = "";
 
     savedFruits.forEach(function(fruit) {
-    const row = document.createElement("tr");
+      const row = document.createElement("tr");
 
-      
       row.innerHTML = `
         <td>${fruit.fruit_name}</td>
         <td>${fruit.calories}</td>
