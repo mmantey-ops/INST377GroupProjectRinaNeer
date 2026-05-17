@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const supabaseClient = require('@supabase/supabase-js');
-const { isValidStateAbbreviation } = require('usa-state-validator');
 const dotenv = require('dotenv');
 
 const app = express();
@@ -16,48 +15,33 @@ const supabaseKey = process.env.SUPABASE_KEY;
 const supabase = supabaseClient.createClient(supabaseUrl, supabaseKey);
 
 app.get('/', (req, res) => {
-  res.sendFile('public/Customers.html', { root: __dirname });
+  res.sendFile('public/index.html', { root: __dirname });
 });
 
-app.get('/customers', async (req, res) => {
-  console.log('Attempting to get all customers!');
+app.get('/api/fruit/:name', async (req, res) => {
+  console.log('getting fruit data!');
+  
+  const fruitName = req.params.name;
+  console.log(`Fruit name: ${fruitName}`);
 
-  const { data, error } = await supabase.from('customer').select();
+  try {
+    const response = await fetch(`https://fruityvice.com/api/fruit/${fruitName}`);
+    const data = await response.json();
 
-  if (error) {
+    console.log('fruit data has been retrieved:', data.name);
+    res.json(data);
+  } catch (error) {
     console.log(`Error: ${error}`);
     res.statusCode = 500;
     res.send(error);
-  } else {
-    console.log('Recieved Data:', data.length);
-    res.json(data);
   }
 });
 
-app.post('/customer', async (req, res) => {
-  console.log('Adding Customer');
-  console.log(`Request: ${JSON.stringify(req.body)}`);
-
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const state = req.body.state;
-
-  if (!isValidStateAbbreviation(state)) {
-    console.log(`State: ${state} is invalid`);
-    res.statusCode = 400;
-    res.json({
-      message: `${state} is not a valid 2 Letter Abbreviation for State`,
-    });
-    return;
-  }
+app.get('/api/saved-fruits', async (req, res) => {
+  console.log('trying to get all saved fruits!');
 
   const { data, error } = await supabase
-    .from('customer')
-    .insert({
-      customer_first_name: firstName,
-      customer_last_name: lastName,
-      customer_state: state,
-    })
+    .from('favorites')
     .select();
 
   if (error) {
@@ -65,6 +49,36 @@ app.post('/customer', async (req, res) => {
     res.statusCode = 500;
     res.send(error);
   } else {
+    console.log('Received Data:', data.length);
+    res.json(data);
+  }
+});
+
+app.post('/api/saved-fruits', async (req, res) => {
+  console.log('Adding saved fruit');
+  console.log(`Request: ${JSON.stringify(req.body)}`);
+
+  const fruitName = req.body.name;
+  const calories = req.body.nutritions.calories;
+  const sugar = req.body.nutritions.sugar;
+  const carbohydrates = req.body.nutritions.carbohydrates;
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .insert({
+      fruit_name: fruitName,
+      calories: calories,
+      sugar: sugar,
+      carbohydrates: carbohydrates,
+    })
+    .select();
+
+  if (error) {
+    console.log(`Error: ${error.message}`);
+    res.statusCode = 500;
+    res.send(error.message);
+  } else {
+    console.log('Fruit saved successfully');
     res.json(data);
   }
 });

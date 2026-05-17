@@ -1,0 +1,74 @@
+<html>
+<head>
+  <title>Fruit Search</title>
+  <link rel="stylesheet" href="Styles.css">
+
+  <!-- The JSLibrary 1(Chart.js) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- The JSLibrary 2(SweetAlert2) -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script src="Script.js" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <h1>Fruit Search</h1>
+
+    <nav>
+      <a href="homepage.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="Fruit.html">Fruit Search</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="fruitSearchBox">
+      <h2>Search for a Fruit</h2>
+
+      <form onsubmit="searchFruit(); return false;">
+        <label for="fruit">Enter a fruit name:</label>
+        <input type="text" id="fruit" placeholder="apple">
+        <input type="submit" value="Search">
+      </form>
+    </section>
+
+    <section class="fruitResultsBox">
+      <h2>Fruit Results</h2>
+
+      <div id="fruitResultsSpot">
+        <p>The fruit information will show up here.</p>
+      </div>
+    </section>
+
+    <section class="fruitChartBox">
+      <h2>Nutrition Chart</h2>
+
+      <canvas id="fruitChart"></canvas>
+    </section>
+
+    <section class="fruitSavedBox">
+      <h2>Saved Fruits</h2>
+
+      <button onclick="loadSavedFruits()">Load Saved Fruits</button>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Fruit Name</th>
+            <th>Calories</th>
+            <th>Sugar</th>
+            <th>Carbs</th>
+          </tr>
+        </thead>
+
+        <tbody id="savedFruitsBody">
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+</body>
+</html>
