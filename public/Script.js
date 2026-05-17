@@ -121,7 +121,7 @@ async function loadSavedFruits() {
     if (fruitNamesShown.has(fruitName)) {
       return;
 }
-
+const row = document.createElement("tr");
 fruitNamesShown.add(fruitName);
       row.innerHTML = `
         <td>${fruit.fruit_name}</td>
