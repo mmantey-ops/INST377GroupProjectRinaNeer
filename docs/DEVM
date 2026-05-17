@@ -2,7 +2,10 @@ Developer Manual (bottom half of your README.md) - 15pts
 The audience of this document is future developers who will take over your system.
 They know technical terms and have general knowledge about web applications, but do not have knowledge about your system design.
 You need to provide a technical document so that future developers can start setting up the application on their local machines, and keep working on the system development after you leave the team.
-This technical document is intended for future developers who will maintain the Fruitify system after the current development team. The audience is expected to have general knowledge of web application development and technical terminology, but no prior understanding of the system architecture or implementation details. The purpose of this document is to provide clear guidance
+This technical document is intended for future developers who will maintain the Fruitify system after 
+the current development team. The audience is expected to have general knowledge of web application development and technical 
+terminology, but no prior understanding of the system architecture or implementation details. The purpose of this document is to provide 
+clear guidance on the application structure and local environment setup.
 Your Developer Manual covers:
 How to install your application and all dependencies
 How to run your application on a server
