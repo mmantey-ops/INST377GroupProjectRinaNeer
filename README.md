@@ -6,4 +6,4 @@ The purpose of Frutifier is to put all the fruit nutrition into one place.
 
 Description of target browsers (iOS? Android? Which ones?): All
 
-[View Developer Manual](./docs/DEVM.md)
+[View Developer Manual](.docs/DEVM.md)
