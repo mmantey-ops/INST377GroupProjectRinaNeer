@@ -102,6 +102,7 @@ async function saveFruit() {
 
 async function loadSavedFruits() {
   const tableBody = document.getElementById("savedFruitsBody");
+  const fruitNamesShown = new Set();
 
   try {
     const response = await fetch("/api/saved-fruits");
@@ -115,8 +116,13 @@ async function loadSavedFruits() {
     tableBody.innerHTML = "";
 
     savedFruits.forEach(function(fruit) {
-      const row = document.createElement("tr");
+     const fruitName = fruit.fruit_name.toLowerCase();
 
+    if (fruitNamesShown.has(fruitName)) {
+      return;
+}
+
+fruitNamesShown.add(fruitName);
       row.innerHTML = `
         <td>${fruit.fruit_name}</td>
         <td>${fruit.calories}</td>
